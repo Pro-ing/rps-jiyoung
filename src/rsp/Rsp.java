@@ -11,8 +11,8 @@ public class Rsp {
 	int random;
 	int playCnt;
 	
-	Rsp(int cnt) {
-		this.playCnt = cnt;
+	public void setCount(int count) {
+		this.playCnt = count;
 	}
 	
 	public void init() {
@@ -42,7 +42,7 @@ public class Rsp {
 	}
 	
 	public void play() {
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < playCnt; i++) {
 			init();
 			if ((usrInput==1 && random==2) || (usrInput==2 && random==3) || (usrInput==3 && random==1)) {
 				win++;
@@ -53,7 +53,6 @@ public class Rsp {
 				System.out.println("짐");
 				lose++;
 			}
-//			System.out.println(i+1 + "번 진행");
 		}
 		print(win, lose);
 	}
@@ -64,11 +63,4 @@ public class Rsp {
 		System.out.println(lose + "번 졌습니다.");
 		System.out.println("종료");
 	}
-	
-	public static void main(String[] args) {
-		Rsp rsc = new Rsp(3);
-		
-		rsc.play();
-	}
-
 }
