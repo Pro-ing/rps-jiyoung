@@ -5,70 +5,80 @@ import java.util.Scanner;
 
 public class Rsp {
 
-   String str[] = {"°¡À§", "¹ÙÀ§", "º¸"};
-   int win, lose;
-   int usrInput;
-   int playCnt;
-   
-   Rsp(int cnt) {
-      this.playCnt = cnt;
-   }
-   
-   public void init() {
-      //ÃÊ±âÈ­ ¹× »ç¿ëÀÚ ÀÔ·Â
-      Scanner scan = new Scanner(System.in);
-      System.out.println("¼ıÀÚ·Î ÀÔ·ÂÇØÁÖ¼¼¿ä 1.°¡À§, 2.¹ÙÀ§, 3.º¸: ");
-      usrInput = scan.nextInt();
-
-      while(true) {
-         if(usrInput == 0 || usrInput > 3) {
-            System.out.println("¼ıÀÚ¸¦ ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä: ");
-            usrInput = scan.nextInt();
-         } else {
-            System.out.println("ÀÔ·ÂÇÑ °ªÀº: " + str[usrInput-1]);
-            break;
-         }
-      }
-//      scan.close();
-   }
-   
-   public int gameStart() {
-      //ÄÄÇ»ÅÍ ·£´ı »ı¼º
-      Random r = new Random();
-      int random = r.nextInt(3)+1;
-      
-      return random;
-   }
-   
-   public void play(int random) {
-      for (int i= 0; i < 3; i++) {
-         init();
-         if ((usrInput==1 && random==2) || (usrInput==2 && random==3) || (usrInput==3 && random==1)) {
-            win++;
-            System.out.println("ÀÌ±è");
-         } else if (usrInput == random) {
-            System.out.println("ºñ±è");
-         } else {
-            System.out.println("Áü");
-            lose++;
-         }
-//         System.out.println(i+1 + "¹ø ÁøÇà");
-      }
-      print(win, lose);
-   }
-   
-   public void print(int win, int lose) {
-      //Ãâ·Â
-      System.out.println(win + "¹ø ÀÌ°å½À´Ï´Ù.");
-      System.out.println(lose + "¹ø Á³½À´Ï´Ù.");
-      System.out.println("Á¾·á");
-   }
-   
-   public static void main(String[] args) {
-      Rsp rsc = new Rsp(3);  // 3¹ø ÀÌ±â°Ô ¸¸µå´Â °É·Î ¹Ù²ãº¸±â
-      
-      int com = rsc.gameStart();
-      rsc.play(com);
-   }
-
+	String str[] = {"ê°€ìœ„", "ë°”ìœ„", "ë³´"};
+	int win, lose;
+	int usrInput;
+	int random;
+	int playCnt, remainCnt;
+	
+	public void setCount(int count) {
+		this.playCnt = count;
+		this.remainCnt = count;
+	}
+	
+	public int getCount() {
+		return playCnt;
+	}
+	
+	public boolean isLeft() {
+		if(remainCnt == 0) {
+			return false;
+		}
+		return true;
+	}
+	
+	public void init() {
+		//ì»´í“¨í„° ëœë¤ ìƒì„±
+		Random r = new Random();
+		random = r.nextInt(3)+1;
+		
+		//ì´ˆê¸°í™” ë° ì‚¬ìš©ì ì…ë ¥
+		Scanner scan = new Scanner(System.in);
+		
+		while(true) {
+			System.out.println("===========================");
+			System.out.println("ìˆ«ìë¡œ ì…ë ¥í•´ì£¼ì„¸ìš” 1.ê°€ìœ„, 2.ë°”ìœ„, 3.ë³´: ");
+			if(scan.hasNextInt()) {
+				usrInput = scan.nextInt();
+				if(usrInput <=0  || usrInput > 3) {
+					System.out.println("ìˆ«ìë¥¼ ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”");
+					continue;
+				} else {
+					System.out.println("ì…ë ¥í•œ ê°’ì€: " + str[usrInput-1] + " vs " + str[random-1]);
+					break;
+				}
+			} else {
+				System.out.println("ìˆ«ìí˜•ì‹ì´ ì•„ë‹™ë‹ˆë‹¤.");
+				scan.next();
+			}
+		}
+	}
+	
+	public void play() {
+		for (int i = 0; i < playCnt; i++) {
+			init();
+			if ((usrInput==1 && random==2) || (usrInput==2 && random==3) || (usrInput==3 && random==1)) {
+				System.out.println("ì´ê²¼ìŠµë‹ˆë‹¤.");
+				win++;
+			} else if (usrInput == random) {
+				System.out.println("ë¹„ê²¼ìŠµë‹ˆë‹¤.");
+			} else {
+				System.out.println("ì¡ŒìŠµë‹ˆë‹¤.");
+				lose++;
+			}
+			remainCnt--;
+		}
+	}
+	
+	public void print() {
+		System.out.println("===========================");
+		if(win > lose) {
+			System.out.println(win +":" + lose + " ì‚¬ìš©ì ìŠ¹");
+		} else if(win < lose) {
+			System.out.println(win +":" + lose + " ì»´í“¨í„° ìŠ¹");
+		} else {
+			System.out.println(win +":" + lose + " ë¬´ìŠ¹ë¶€");
+		}
+		System.out.println("ì¢…ë£Œí•©ë‹ˆë‹¤.");
+	}
 }
