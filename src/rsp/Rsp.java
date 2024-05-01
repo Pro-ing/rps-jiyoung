@@ -8,6 +8,7 @@ public class Rsp {
 	String str[] = {"가위", "바위", "보"};
 	int win, lose;
 	int usrInput;
+	int random;
 	int playCnt;
 	
 	Rsp(int cnt) {
@@ -15,6 +16,10 @@ public class Rsp {
 	}
 	
 	public void init() {
+		//컴퓨터 랜덤 생성
+		Random r = new Random();
+		random = r.nextInt(3)+1;
+		
 		//초기화 및 사용자 입력
 		Scanner scan = new Scanner(System.in);
 		
@@ -36,15 +41,7 @@ public class Rsp {
 		}
 	}
 	
-	public int gameStart() {
-		//컴퓨터 랜덤 생성
-		Random r = new Random();
-		int random = r.nextInt(3)+1;
-		
-		return random;
-	}
-	
-	public void play(int random) {
+	public void play() {
 		for (int i = 0; i < 3; i++) {
 			init();
 			if ((usrInput==1 && random==2) || (usrInput==2 && random==3) || (usrInput==3 && random==1)) {
@@ -71,8 +68,7 @@ public class Rsp {
 	public static void main(String[] args) {
 		Rsp rsc = new Rsp(3);
 		
-		int com = rsc.gameStart();
-		rsc.play(com);
+		rsc.play();
 	}
 
 }
