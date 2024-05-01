@@ -17,19 +17,23 @@ public class Rsp {
 	public void init() {
 		//초기화 및 사용자 입력
 		Scanner scan = new Scanner(System.in);
-		System.out.println("숫자로 입력해주세요 1.가위, 2.바위, 3.보: ");
-		usrInput = scan.nextInt();
 		
 		while(true) {
-			if(usrInput == 0 || usrInput > 3) {
-				System.out.println("숫자를 다시 입력해주세요: ");
+			System.out.println("숫자로 입력해주세요 1.가위, 2.바위, 3.보: ");
+			if(scan.hasNextInt()) {
 				usrInput = scan.nextInt();
+				if(usrInput <=0  || usrInput > 3) {
+					System.out.println("숫자를 다시 입력해주세요: ");
+					continue;
+				} else {
+					System.out.println("입력한 값은: " + str[usrInput-1]);
+					break;
+				}
 			} else {
-				System.out.println("입력한 값은: " + str[usrInput-1]);
-				break;
+				System.out.println("숫자형식이 아닙니다.");
+				scan.next();
 			}
 		}
-//		scan.close();
 	}
 	
 	public int gameStart() {
