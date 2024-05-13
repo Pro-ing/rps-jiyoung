@@ -1,26 +1,24 @@
 package rsp;
 
+import player.Multi;
+import player.User;
+
 public class RspMain {
 
 	public static void main(String[] args) {
-		Rsp rsc = new Rsp();
+		User user  = new User("지영");
+		User user2 = new User("지영2");
+
+		user.setResult("가위");
+		user2.setResult("바위");
 		
-		rsc.setCount(3);
+		Multi multi = new Multi();
+		multi.addUser(user);
+		multi.addUser(user2);
 		
-		boolean state = rsc.isLeft();
+		Rsp rps = new Rsp();
+		rps.getUser(multi);
 		
-		if (state) {
-			System.out.println("게임을 시작합니다.");
-			System.out.println("게임은 " + rsc.getCount() + "번 진행합니다.");
-			
-			rsc.play();
-		}
-		
-		if(rsc.isLeft()) {
-			System.out.println("실행횟수 남아있음");
-		} else {
-			rsc.print();
-		}
 	}
 
 }
