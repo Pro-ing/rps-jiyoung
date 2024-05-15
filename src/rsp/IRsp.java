@@ -1,9 +1,9 @@
 package rsp;
 
-import player.User;
+import player.Player;
 
 public interface IRsp {
 	
-	void game(User user);
+	void game(Player player);
 	
 }

@@ -3,30 +3,48 @@ package rsp;
 import java.util.ArrayList;
 
 import player.Computer;
-import player.Multi;
+import player.Player;
 import player.User;
 
 public class Rsp implements IRsp{
-	
-	// 사용자 이름
-	public void getUser(Multi multi) {
-		ArrayList<User> userList = multi.getUserList();
+
+	@Override
+	public void game(Player player) {
 		
-		for(User user : userList) {
+		ArrayList<User> userList = player.getUserList();
+		ArrayList<Computer> comList = player.getCompList();
+		ArrayList<String> winner = new ArrayList<>();
+		
+		ResultType result;
+		
+		String com = comList.get(0).getResult();
+		
+		System.out.println("참여자 수 : " + userList.size());
+		for(int i = 0; i < userList.size(); i++) {
 			System.out.println("===========================");
-			System.out.println(user.getName() + " 참여합니다.");
+			System.out.println(userList.get(i).getName());
 			System.out.println("===========================");
-			game(user);
+			System.out.println(comList.get(0).getName() + ":  " + com);
+			System.out.println(userList.get(i).getName() + " : " +userList.get(i).getResult());
+			if ((com=="가위" && userList.get(i).getResult()=="바위") || (com=="바위" && userList.get(i).getResult() =="보") || (com=="보" && userList.get(i).getResult() =="가위")) {
+				result = ResultType.WIN;
+				winner.add(userList.get(i).getName());
+			} else if (com == userList.get(i).getResult()) {
+				result = ResultType.DRAW;
+			} else {
+				result = ResultType.LOSE;
+			}
+			
+			print(result);
+		}
+		
+		for(String win : winner) {
+			System.out.println("===========================");
+			System.out.println("[우승자 : " + win + "]");
 		}
 	}
-
-	// 게임 시작
-	@Override
-	public void game(User user) {
-		Computer com = new Computer();
-		System.out.println("컴퓨터 결과: " + com.getResult());
-		
-		System.out.println(user.getName() + " 결과: " + user.getResult());
-		
+	
+	public void print(ResultType result) {
+		System.out.println(result);
 	}
 }
