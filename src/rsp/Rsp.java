@@ -26,13 +26,36 @@ public class Rsp implements IRsp{
 			System.out.println("===========================");
 			System.out.println(comList.get(0).getName() + ":  " + com);
 			System.out.println(userList.get(i).getName() + " : " +userList.get(i).getResult());
-			if ((com=="가위" && userList.get(i).getResult()=="바위") || (com=="바위" && userList.get(i).getResult() =="보") || (com=="보" && userList.get(i).getResult() =="가위")) {
-				result = ResultType.WIN;
-				winner.add(userList.get(i).getName());
-			} else if (com == userList.get(i).getResult()) {
-				result = ResultType.DRAW;
+			
+			if (("가위").equals(com)) {
+				if(("바위").equals(userList.get(i).getResult())) {
+					result = ResultType.WIN;
+					winner.add(userList.get(i).getName());
+				} else if(("가위").equals(userList.get(i).getResult())) {
+					result = ResultType.DRAW;
+				} else {
+					result = ResultType.LOSE;
+				}
+			} else if(("바위").equals(com)) {
+				if(("보").equals(userList.get(i).getResult())) {
+					result = ResultType.WIN;
+					winner.add(userList.get(i).getName());
+				} else if(("바위").equals(userList.get(i).getResult())) {
+					result = ResultType.DRAW;
+				} else {
+					result = ResultType.LOSE;
+				}
+			} else if(("보").equals(com)) {
+				if(("가위").equals(userList.get(i).getResult())) {
+					result = ResultType.WIN;
+					winner.add(userList.get(i).getName());
+				} else if(("보").equals(userList.get(i).getResult())) {
+					result = ResultType.DRAW;
+				} else {
+					result = ResultType.LOSE;
+				}
 			} else {
-				result = ResultType.LOSE;
+				result =  ResultType.LOSE;
 			}
 			
 			print(result);
