@@ -3,13 +3,13 @@ package rsp;
 import java.util.ArrayList;
 
 import player.Computer;
-import player.Player;
+import player.PlayerManager;
 import player.User;
 
 public class Rsp implements IRsp{
 
 	@Override
-	public void game(Player player) {
+	public void game(PlayerManager player) {
 		
 		ArrayList<User> userList = player.getUserList();
 		ArrayList<Computer> comList = player.getCompList();

@@ -2,7 +2,7 @@ package player;
 
 import java.util.ArrayList;
 
-public class Player {
+public class PlayerManager {
 
 	private ArrayList<User> userList = new ArrayList<User>();
 	private ArrayList<Computer> compList =new ArrayList<Computer>();

@@ -1,7 +1,7 @@
 package rsp;
 
 import player.Computer;
-import player.Player;
+import player.PlayerManager;
 import player.User;
 
 public class RspMain {
@@ -15,7 +15,7 @@ public class RspMain {
 		
 		Computer com = new Computer("컴퓨터");
 		
-		Player player = new Player();
+		PlayerManager player = new PlayerManager();
 		player.addUser(user);
 		player.addUser(user2);
 		player.addComputer(com);
