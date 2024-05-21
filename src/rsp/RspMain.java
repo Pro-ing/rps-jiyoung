@@ -1,6 +1,7 @@
 package rsp;
 
-import player.Multi;
+import player.Computer;
+import player.PlayerManager;
 import player.User;
 
 public class RspMain {
@@ -8,17 +9,22 @@ public class RspMain {
 	public static void main(String[] args) {
 		User user  = new User("지영");
 		User user2 = new User("지영2");
-
+		User user3 = new User("지영3");
+		
 		user.setResult("가위");
 		user2.setResult("바위");
+		user3.setResult("바위");
 		
-		Multi multi = new Multi();
-		multi.addUser(user);
-		multi.addUser(user2);
+		Computer com = new Computer("컴퓨터");
 		
-		Rsp rps = new Rsp();
-		rps.getUser(multi);
+		PlayerManager player = new PlayerManager();
+		player.addUser(user);
+		player.addUser(user2);
+		player.addUser(user3);
+		player.addComputer(com);
 		
+		Rsp rsp = new Rsp();
+		rsp.game(player);
 	}
 
 }
