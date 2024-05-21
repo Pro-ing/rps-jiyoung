@@ -68,6 +68,12 @@ public class Rsp implements IRsp{
 	}
 	
 	public void print(ResultType result) {
-		System.out.println(result);
+		if(result == ResultType.WIN) {
+			System.out.println("이겼어요!!!");
+		} else if(result == ResultType.DRAW) {
+			System.out.println("비겼어요");
+		} else if(result == ResultType.LOSE) {
+			System.out.println("졌습니다");
+		}
 	}
 }
